@@ -1,0 +1,21 @@
+.round {
+  border: 1px solid green;
+  border-radius: 50%;
+  background: none;
+  width: 75px;
+  height: 75px;
+  text-transform: uppercase;
+  color: green;
+  cursor: pointer;
+  outline: none;
+  transition: all .4s;
+  margin-right: 12px;
+}
+.round:hover {
+  font-weight: bold;
+  font-size: 18px;
+}
+.round:disabled {
+  border: 1px solid red;
+  color: red;
+}
