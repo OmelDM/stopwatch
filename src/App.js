@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Timer from './Timer';
 import Button from './Button';
 import Display from './Display';
+import LapContainer from './LapContainer';
 import './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
       lapTime: 0,
       isStarted: false,
       isResetted: true,
+      laps: [],
     };
 
     this._mainTimer = new Timer();
@@ -58,8 +60,11 @@ class App extends Component {
   _handleAdditionalButtonClick() {
     if (this.state.isStarted) {
       // Handle 'Lap' click
-      console.log('Lap: ', this._lapTimer.time);
-      console.log('Main: ', this._mainTimer.time);
+      const laps = this.state.laps.slice();
+      laps.push(this._lapTimer.time);
+      this.setState({
+        laps: laps
+      });
       this._lapTimer.reset();
       this._lapTimer.start();
     } else if (!this.state.isResetted) {
@@ -68,7 +73,8 @@ class App extends Component {
       this._lapTimer.reset();
       this.setState({
         isStarted: false,
-        isResetted: true
+        isResetted: true,
+        laps: [],
       });
     }
   }
@@ -92,6 +98,7 @@ class App extends Component {
           {(this.state.isStarted) ? 'Stop' : 'Start'}
         </MainButton>
         <LapTimerDisplay time={this.state.lapTime} />
+      <LapContainer laps={this.state.laps} />
       </div>
     );
   }
