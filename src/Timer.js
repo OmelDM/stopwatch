@@ -36,6 +36,8 @@ class Timer {
 
   // Observer pattern from GoF
   // Every Observer should implement timerDidUpdate() function to be notified
+  // timerDidUpdate(timer)
+  //  timer - reference to current timer
   addObserver(observer) {
     if (!this._observerList) {
       this._observerList = [];
@@ -53,7 +55,7 @@ class Timer {
   _updateObservers() {
     this._observerList.forEach((observer) => {
       if (observer.timerDidUpdate) {
-        observer.timerDidUpdate();
+        observer.timerDidUpdate(this);
       }
     });
   }

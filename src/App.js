@@ -13,18 +13,27 @@ class App extends Component {
 
     this.state = {
       mainTime: 0,
+      lapTime: 0,
       isStarted: false,
       isResetted: true,
     };
 
     this._mainTimer = new Timer();
     this._mainTimer.addObserver(this);
+    this._lapTimer = new Timer();
+    this._lapTimer.addObserver(this);
   }
 
-  timerDidUpdate() {
-    this.setState({
-      mainTime: this._mainTimer.time
-    });
+  timerDidUpdate(timer) {
+    if (timer === this._mainTimer) {
+      this.setState({
+        mainTime: this._mainTimer.time
+      });
+    } else if (timer === this._lapTimer) {
+      this.setState({
+        lapTime: this._lapTimer.time
+      });
+    }
   }
 
   _handleMainButtonClick() {
@@ -33,9 +42,11 @@ class App extends Component {
     if (isStarted) {
       // Handle 'Start' click
         this._mainTimer.start();
+        this._lapTimer.start();
     } else {
       // Handle 'Stop' click
       this._mainTimer.stop();
+      this._lapTimer.stop();
     }
 
     this.setState({
@@ -47,10 +58,14 @@ class App extends Component {
   _handleAdditionalButtonClick() {
     if (this.state.isStarted) {
       // Handle 'Lap' click
-      alert(this._mainTimer.time);
+      console.log('Lap: ', this._lapTimer.time);
+      console.log('Main: ', this._mainTimer.time);
+      this._lapTimer.reset();
+      this._lapTimer.start();
     } else if (!this.state.isResetted) {
       // Handle 'Reset' click
       this._mainTimer.reset();
+      this._lapTimer.reset();
       this.setState({
         isStarted: false,
         isResetted: true
@@ -61,10 +76,12 @@ class App extends Component {
   render() {
     const MainButton = Button;
     const AdditionalButton = Button;
+    const MainTimerDisplay = Display;
+    const LapTimerDisplay = Display;
 
     return (
       <div className="red">
-        <Display time={this.state.mainTime} />
+        <MainTimerDisplay time={this.state.mainTime} />
         <AdditionalButton
           onClick={this._handleAdditionalButtonClick}
           disabled={!this.state.isStarted && this.state.isResetted}
@@ -74,6 +91,7 @@ class App extends Component {
         <MainButton onClick={this._handleMainButtonClick}>
           {(this.state.isStarted) ? 'Stop' : 'Start'}
         </MainButton>
+        <LapTimerDisplay time={this.state.lapTime} />
       </div>
     );
   }
