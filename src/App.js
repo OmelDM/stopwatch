@@ -8,7 +8,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this._updateMainTime = this._updateMainTime.bind(this);
     this._handleMainButtonClick = this._handleMainButtonClick.bind(this);
     this._handleAdditionalButtonClick = this._handleAdditionalButtonClick.bind(this);
 
@@ -19,10 +18,10 @@ class App extends Component {
     };
 
     this._mainTimer = new Timer();
-    this._mainTimer.timerDidUpdate = this._updateMainTime;
+    this._mainTimer.addObserver(this);
   }
 
-  _updateMainTime() {
+  timerDidUpdate() {
     this.setState({
       mainTime: this._mainTimer.time
     });

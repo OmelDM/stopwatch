@@ -3,15 +3,10 @@ class Timer {
     this._time = 0;
     this._pauseTime = 0;
     this._intervalId = 0;
-    this._timerDidUpdateCallback = null;
   }
 
   get time() {
     return this._time;
-  }
-
-  set timerDidUpdate(newCallback) {
-    this._timerDidUpdateCallback = newCallback;
   }
 
   start() {
@@ -21,7 +16,7 @@ class Timer {
         const currentTime = new Date();
         const time = (currentTime.getTime() - startTime);
         this._time = time + this._pauseTime;
-        this._timerDidUpdate();
+        this._updateObservers();
       }, 10
     );
   }
@@ -36,13 +31,31 @@ class Timer {
     this.stop();
     this._time = 0;
     this._pauseTime = 0;
-    this._timerDidUpdate();
+    this._updateObservers();
   }
 
-  _timerDidUpdate() {
-    if (this._timerDidUpdateCallback) {
-      this._timerDidUpdateCallback();
+  // Observer pattern from GoF
+  // Every Observer should implement timerDidUpdate() function to be notified
+  addObserver(observer) {
+    if (!this._observerList) {
+      this._observerList = [];
     }
+    this._observerList.push(observer);
+  }
+
+  removeObserver(observer) {
+    const deletedIndex = this._observerList.indexOf(observer);
+    if (-1 !== deletedIndex) {
+      this._observerList.splice(deletedIndex, 1);
+    }
+  }
+
+  _updateObservers() {
+    this._observerList.forEach((observer) => {
+      if (observer.timerDidUpdate) {
+        observer.timerDidUpdate();
+      }
+    });
   }
 }
 
