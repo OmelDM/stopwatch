@@ -11,7 +11,7 @@ class LapContainer extends React.Component {
       }, lap);
 
       return (
-        <tr key={lap}>
+        <tr key={sum}>
           <td>{index + 1}</td>
           <td><Display time={lap} /></td>
           <td><Display time={sum} /></td>
