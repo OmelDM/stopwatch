@@ -1,0 +1,9 @@
+.stopwatch {
+  color: red;
+  width: 1024px;
+}
+.stopwatch__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,21 +1,26 @@
-.round {
-  border: 1px solid green;
+.button {
   border-radius: 50%;
-  background: none;
-  width: 75px;
-  height: 75px;
-  text-transform: uppercase;
-  color: green;
+  background-color: #efeff4;
+  border: none;
+  width: 110px;
+  height: 110px;
+  color: #000;
+  font-size: 20px;
   cursor: pointer;
   outline: none;
-  transition: all .4s;
-  margin-right: 12px;
+  text-align: center;
 }
-.round:hover {
-  font-weight: bold;
-  font-size: 18px;
+.button:hover {
+  background-color: #d6d6db;
 }
-.round:disabled {
-  border: 1px solid red;
+.button:disabled {
+  background-color: #f8f8fa;
+  color: #89898a;
+  cursor: initial;
+}
+.button_red {
   color: red;
+}
+.button_green {
+  color: green;
 }

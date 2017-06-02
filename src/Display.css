@@ -1,3 +1,18 @@
-h1 {
+.display-container {
+  padding: 70px 55px 27px;
+}
+.display {
   text-align: center;
+  font-size: 18px;
+  color: #000;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 1.0;
+}
+.display_maintime {
+  font-size: 110px;
+  margin-bottom: 20px;
+}
+.display_laptime {
+  font-size: 25px;
+  color: #a6a6aa;
 }

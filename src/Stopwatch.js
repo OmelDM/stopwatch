@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Timer from './Timer';
-import Button from './Button';
-import Display from './Display';
+import AdditionalButton from './AdditionalButton';
+import MainButton from './MainButton';
+import DisplayContainer from './DisplayContainer';
 import LapContainer from './LapContainer';
-import './App.css';
+import './Stopwatch.css';
 
-class App extends Component {
+class Stopwatch extends Component {
   constructor(props) {
     super(props);
 
@@ -80,28 +81,27 @@ class App extends Component {
   }
 
   render() {
-    const MainButton = Button;
-    const AdditionalButton = Button;
-    const MainTimerDisplay = Display;
-    const LapTimerDisplay = Display;
-
     return (
-      <div className="red">
-        <MainTimerDisplay time={this.state.mainTime} />
-        <AdditionalButton
-          onClick={this._handleAdditionalButtonClick}
-          disabled={!this.state.isStarted && this.state.isResetted}
-        >
-          {(!this.state.isStarted && !this.state.isResetted) ? 'Reset' : 'Lap'}
-        </AdditionalButton>
-        <MainButton onClick={this._handleMainButtonClick}>
-          {(this.state.isStarted) ? 'Stop' : 'Start'}
-        </MainButton>
-        <LapTimerDisplay time={this.state.lapTime} />
-      <LapContainer laps={this.state.laps} />
+      <div className="stopwatch">
+        <div className='stopwatch__controls'>
+          <AdditionalButton
+            onClick={this._handleAdditionalButtonClick}
+            isStarted={this.state.isStarted}
+            isResetted={this.state.isResetted}
+          />
+          <DisplayContainer
+            mainTime={this.state.mainTime}
+            lapTime={this.state.lapTime}
+          />
+          <MainButton
+            onClick={this._handleMainButtonClick}
+            isStarted={this.state.isStarted}
+          />
+        </div>
+        <LapContainer laps={this.state.laps} />
       </div>
     );
   }
 }
 
-export default App;
+export default Stopwatch;

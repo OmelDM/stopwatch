@@ -1,5 +1,14 @@
-.red {
-  color: red;
-  margin: 20px auto;
-  width: 174px;
+.app__title {
+  background-color: #f9f9f9;
+  line-height: 1;
+  color: #000;
+  padding: 22px 0;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 1px 1px #b3b3b3;
+}
+.app__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

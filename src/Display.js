@@ -4,7 +4,9 @@ import './Display.css';
 class Display extends React.Component {
   render() {
     return (
-      <h1>{stringFromMilliseconds(this.props.time)}</h1>
+      <h2 className={'display ' + this.props.className}>
+        {stringFromMilliseconds(this.props.time)}
+      </h2>
     );
   }
 }
