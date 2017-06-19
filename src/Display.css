@@ -1,6 +1,14 @@
 .display-container {
   padding: 70px 55px 27px;
 }
+
+@media (max-width: 700px) {
+  .display-container {
+    order: -1;
+    flex-basis: 100%;
+    padding: 50px 0 20px;
+  }
+}
 .display {
   text-align: center;
   font-size: 18px;
