@@ -9,6 +9,8 @@
   cursor: pointer;
   outline: none;
   text-align: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 .button:hover {
   background-color: #d6d6db;

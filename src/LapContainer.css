@@ -4,6 +4,7 @@
   border-collapse: collapse;
   margin: auto;
   min-width: 172px;
+  width: 100%;
 }
 .laps th, .laps td {
   padding: 5px 10px;
